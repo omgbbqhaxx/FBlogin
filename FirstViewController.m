@@ -8,6 +8,7 @@
 
 #import "FirstViewController.h"
 #import "LoggedinViewController.h"
+#import "AppDelegate.h"
 
 @interface FirstViewController ()
 
@@ -29,9 +30,16 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fixUser:) name:@"userinfo" object:nil];
     
     UIImage *img = [UIImage imageNamed:@"cs.gif"];
-    [gif startAnimating];
     [gif setImage:img];
-    loginButton.hidden = YES;
+    
+    if (FBSession.activeSession.state == FBSessionStateOpen || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
+        loginButton.hidden = YES;
+        
+    } else {
+        loginButton.hidden = NO;
+       
+    }
+    
     
 
 }
@@ -57,6 +65,30 @@
 
 
 
+- (IBAction)tap:(id)sender {
+    
+    
+    if (FBSession.activeSession.state == FBSessionStateOpen
+        || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
+        // Close the session and remove the access token from the cache
+        // The session state handler (in the app delegate) will be called automatically
+        [FBSession.activeSession closeAndClearTokenInformation];
+        // If the session state is not any of the two "open" states when the button is clicked
+    } else {
+        // Open a session showing the user the login UI
+        // You must ALWAYS ask for public_profile permissions when opening a session
+        [FBSession openActiveSessionWithReadPermissions:@[@"public_profile"]
+                                           allowLoginUI:YES
+                                      completionHandler:
+         ^(FBSession *session, FBSessionState state, NSError *error) {
+             // Retrieve the app delegate
+             AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+             // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
+             [appDelegate sessionStateChanged:session state:state error:error];
+         }];
+    }
+    
+}
 
 
 - (void)didReceiveMemoryWarning

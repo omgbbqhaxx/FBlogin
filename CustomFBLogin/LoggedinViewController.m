@@ -35,7 +35,20 @@
 
 
 - (IBAction)logMeOut:(id)sender {
+    
     [FBSession.activeSession closeAndClearTokenInformation];
+    
+    [self performSegueWithIdentifier:@"s2" sender:self];
+    
+    
+   
+
+    
+    
+    
+    
+    
+   
 }
 
 

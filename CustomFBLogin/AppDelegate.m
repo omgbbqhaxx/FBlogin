@@ -191,17 +191,17 @@
     // [loginButton setTitle:@"Log in with Facebook" forState:UIControlStateNormal];
     // Confirm logout message
     
-    UIButton *lbtn = [self.customLoginViewController loginButton];
-    lbtn.hidden  = NO;
+    //UIButton *lbtn = [self.customLoginViewController loginButton];
+    //lbtn.hidden  = NO;
     
-    [self showMessage:@"You're now logged out" withTitle:@""];
+   // [self showMessage:@"You're now logged out" withTitle:@""];
 }
 
 // Show the user the logged-in UI
 - (void)userLoggedIn
 {
-    UIButton *lbtn = [self.customLoginViewController loginButton];
-    lbtn.hidden  = YES;
+    //UIButton *lbtn = [self.customLoginViewController loginButton];
+    //lbtn.hidden  = YES;
    // [self showMessage:@"Giriş başarılı" withTitle:@"Welcome!"];
     
 }
