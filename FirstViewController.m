@@ -16,7 +16,7 @@
 
 @implementation FirstViewController
 
-@synthesize loginButton, fvcMail, gif, notificationgeldimi;
+@synthesize loginButton, fvcMail, gif, fvcID, fvcName;
 
 
 
@@ -49,6 +49,9 @@
 -(void)fixUser: (NSNotification *) notification {
     
     fvcMail = [notification.userInfo objectForKey:@"email"];
+    fvcName = [notification.userInfo objectForKey:@"first_name"];
+    fvcID = [notification.userInfo objectForKey:@"id"];
+    
     NSLog(@"Notif : %@", [notification.userInfo objectForKey:@"email"]);
       [self performSegueWithIdentifier:@"s1" sender:self];
     
@@ -60,6 +63,9 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     LoggedinViewController *livc = [segue destinationViewController];
     livc.userMail = fvcMail;
+    livc.userName = fvcName;
+    livc.userID = fvcID;
+    
 
 }
 
@@ -77,7 +83,7 @@
     } else {
         // Open a session showing the user the login UI
         // You must ALWAYS ask for public_profile permissions when opening a session
-        [FBSession openActiveSessionWithReadPermissions:@[@"public_profile"]
+        [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"]
                                            allowLoginUI:YES
                                       completionHandler:
          ^(FBSession *session, FBSessionState state, NSError *error) {

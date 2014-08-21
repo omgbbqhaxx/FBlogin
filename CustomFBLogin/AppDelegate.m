@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 @implementation AppDelegate
-@synthesize customLoginViewController, userMail;
+@synthesize customLoginViewController, userMail , userID, userName;
 
 
 
@@ -82,7 +82,7 @@
         [FBRequestConnection startWithGraphPath:@"me" parameters:@{@"fields": @"first_name, last_name, picture.type(normal), email"} HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (!error) {
                 //uygulama başarılı olduğunda yapılcaklar @omgbbqhax
-                
+                NSLog(@"%@", result);
                 
                 userMail = [result objectForKey:@"email"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"userinfo" object:nil userInfo:result];

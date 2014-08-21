@@ -16,6 +16,8 @@
 @property (strong, nonatomic) FirstViewController *customLoginViewController;
 
 @property NSString *userMail;
+@property NSString *userID;
+@property NSString *userName;
 
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error;
 - (void)userLoggedIn;

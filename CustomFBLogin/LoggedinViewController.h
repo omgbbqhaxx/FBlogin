@@ -11,7 +11,11 @@
 @interface LoggedinViewController : UIViewController
 
 @property NSString * userMail;
+@property NSString * userID;
+@property NSString * userName;
 @property (weak, nonatomic) IBOutlet UILabel *mailLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *pp;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 
 @end

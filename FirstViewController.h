@@ -11,7 +11,8 @@
 @interface FirstViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property NSString *fvcMail;
+@property NSString *fvcID;
+@property NSString *fvcName;
 @property (weak, nonatomic) IBOutlet UIImageView *gif;
-@property BOOL notificationgeldimi;
 
 @end

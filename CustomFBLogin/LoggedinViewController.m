@@ -15,13 +15,20 @@
 @implementation LoggedinViewController
 
 
-@synthesize userMail, mailLabel;
+@synthesize userMail, mailLabel, userID, userName, nameLabel, pp;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     mailLabel.text = userMail;
+    nameLabel.text = userName;
+    NSString *someOtherString = [NSString stringWithFormat: @"http://graph.facebook.com/%@/picture?height=200&width=200", userID];
+    
+    NSURL *imageURL = [NSURL URLWithString:someOtherString];
+    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+    UIImage *myimg = [UIImage imageWithData:imageData];
+    [pp setImage:myimg];
     
 }
 
@@ -40,15 +47,6 @@
     
     [self performSegueWithIdentifier:@"s2" sender:self];
     
-    
-   
-
-    
-    
-    
-    
-    
-   
 }
 
 
