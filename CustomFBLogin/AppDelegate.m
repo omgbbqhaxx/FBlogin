@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "FirstViewController.h"
 
 @implementation AppDelegate
 @synthesize customLoginViewController, userMail;
@@ -16,7 +15,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-   
+    FirstViewController *fvc = [[FirstViewController alloc] init];
+    self.customLoginViewController = fvc;
+    
    
     //self.window.backgroundColor = [UIColor whiteColor];
     //[self.window makeKeyAndVisible];
@@ -94,7 +95,7 @@
             }
         }];
         
-       // [self userLoggedIn];
+        [self userLoggedIn];
         return;
     }
     if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
@@ -141,7 +142,7 @@
         }
         // Clear this token
         [FBSession.activeSession closeAndClearTokenInformation];
-        // Show the user the logged-out UI
+        
         [self userLoggedOut];
     }
 }
@@ -186,18 +187,22 @@
 - (void)userLoggedOut
 {
     // Set the button title as "Log in with Facebook"
-    UIButton *loginButton = [self.customLoginViewController loginButton];
-    [loginButton setTitle:@"Log in with Facebook" forState:UIControlStateNormal];
-    
+    //UIButton *loginButton = [self.customLoginViewController loginButton];
+    // [loginButton setTitle:@"Log in with Facebook" forState:UIControlStateNormal];
     // Confirm logout message
+    
+    UIButton *lbtn = [self.customLoginViewController loginButton];
+    lbtn.hidden  = NO;
+    
     [self showMessage:@"You're now logged out" withTitle:@""];
 }
 
 // Show the user the logged-in UI
 - (void)userLoggedIn
 {
-    // Welcome message
-    [self showMessage:@"Giriş başarılı" withTitle:@"Welcome!"];
+    UIButton *lbtn = [self.customLoginViewController loginButton];
+    lbtn.hidden  = YES;
+   // [self showMessage:@"Giriş başarılı" withTitle:@"Welcome!"];
     
 }
 

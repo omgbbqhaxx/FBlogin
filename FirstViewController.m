@@ -30,8 +30,8 @@
     
     UIImage *img = [UIImage imageNamed:@"cs.gif"];
     [gif startAnimating];
-    
     [gif setImage:img];
+    loginButton.hidden = YES;
     
 
 }
